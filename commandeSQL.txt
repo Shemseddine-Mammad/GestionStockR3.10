@@ -153,18 +153,17 @@ créer ces utilisateurs et leur attribuer les bons droits
 _______________________________________________________________________________________
 
 /* 1. Création de l'utilisateur ADMIN_APP */
-/* Consigne : Tous droits sur GestionStock [cite: 41] */
+/* Consigne : Tous droits sur GestionStock */
 CREATE USER IF NOT EXISTS 'admin_app'@'localhost' IDENTIFIED BY 'admin123';
 GRANT ALL PRIVILEGES ON GestionStock.* TO 'admin_app'@'localhost';
 
 /* 2. Création de l'utilisateur LECTEUR */
-/* Consigne : SELECT uniquement [cite: 42] */
+/* Consigne : SELECT uniquement */
 CREATE USER IF NOT EXISTS 'lecteur'@'localhost' IDENTIFIED BY 'visiteur123';
 GRANT SELECT ON GestionStock.* TO 'lecteur'@'localhost';
 
 /* 3. Création de l'utilisateur API_USER */
-/* Consigne : SELECT/INSERT/UPDATE uniquement + Restriction IP 127.0.0.1 [cite: 44] */
-/* Note : On utilise '127.0.0.1' au lieu de 'localhost' pour forcer la restriction TCP/IP demandée */
+/* On utilise '127.0.0.1' au lieu de 'localhost' pour forcer la restriction TCP/IP demandée */
 CREATE USER IF NOT EXISTS 'api_user'@'127.0.0.1' IDENTIFIED BY 'api123';
 GRANT SELECT, INSERT, UPDATE ON GestionStock.* TO 'api_user'@'127.0.0.1';
 
@@ -195,3 +194,6 @@ DROP TABLE produit;
 
 /* récupération de la sauvgarde avant supprésion */
 mysql -u root -p GestionStock < sauvegarde_projet.sql
+
+
+ALTER TABLE produit ADD COLUMN description TEXT;
